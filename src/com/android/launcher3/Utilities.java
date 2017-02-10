@@ -29,6 +29,7 @@ import android.app.ActivityOptions;
 import android.app.Person;
 import android.app.WallpaperManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.LauncherActivityInfo;
 import android.content.pm.LauncherApps;
 import android.content.pm.ShortcutInfo;
@@ -103,6 +104,8 @@ import java.util.function.Predicate;
  * Various utilities shared amongst the Launcher's classes.
  */
 public final class Utilities {
+
+    private static final String KEY_DT_GESTURE = "pref_dt_gesture";
 
     private static final String TAG = "Launcher.Utilities";
 
@@ -941,5 +944,10 @@ public final class Utilities {
             }
         }
         return null;
+    }
+
+    public static boolean isDoubleTapGestureEnabled(Context context) {
+        SharedPreferences prefs = LauncherPrefs.getPrefs(context.getApplicationContext());
+        return prefs.getBoolean(KEY_DT_GESTURE, true);
     }
 }
