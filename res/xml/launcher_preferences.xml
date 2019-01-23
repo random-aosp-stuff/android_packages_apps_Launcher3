@@ -57,6 +57,10 @@
         android:defaultValue="true"
         android:persistent="true" />
 
+    <Preference
+        android:key="pref_trust_apps"
+        android:title="@string/trust_apps_manager_name" />
+
     <SwitchPreferenceCompat
         android:key="pref_allapps_themed_icons"
         android:title="@string/pref_themed_icons_title"
