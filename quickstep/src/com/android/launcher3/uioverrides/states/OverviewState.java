@@ -129,8 +129,11 @@ public class OverviewState extends LauncherState {
         if (showFloatingSearch) {
             elements |= FLOATING_SEARCH_BAR;
         }
+        if (!LauncherPrefs.RECENTS_CLEAR_ALL.get(launcher)) {
+            elements |= CLEAR_ALL_BUTTON;
+        }
         if (launcherUiState.isSplitSelectActiveRef().getValue()) {
-            elements &= ~ADD_DESK_BUTTON;
+            elements &= ~CLEAR_ALL_BUTTON & ~ADD_DESK_BUTTON;
         }
         return elements;
     }
