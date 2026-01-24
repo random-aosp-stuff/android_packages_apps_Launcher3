@@ -129,7 +129,7 @@ public class OverviewState extends LauncherState {
         if (showFloatingSearch) {
             elements |= FLOATING_SEARCH_BAR;
         }
-        if (!LauncherPrefs.RECENTS_CLEAR_ALL.get(launcher)) {
+        if (!LauncherPrefs.RECENTS_CLEAR_ALL.get(dp.getContext())) {
             elements |= CLEAR_ALL_BUTTON;
         }
         if (launcherUiState.isSplitSelectActiveRef().getValue()) {

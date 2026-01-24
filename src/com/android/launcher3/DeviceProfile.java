@@ -189,6 +189,8 @@ public class DeviceProfile {
     // DragController
     public int flingToDeleteThresholdVelocity;
 
+    private final Context context;
+
     /** Used only as an alternative to mocking when null values cannot be used. */
     @VisibleForTesting
     public DeviceProfile() {
@@ -227,6 +229,7 @@ public class DeviceProfile {
         hotseatProfile = new HotseatProfile(false, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
         mTaskbarProfile = new TaskbarProfile(0, 0, 0, 0, 0, false, false);
         mFolderProfile = new FolderProfile(0, 0, 0, 0, 0, new Point(), 0, 0, 0, 0, 0, 0, 0, 0);
+        context = null;
         inv = null;
         mDisplayOptionSpec = null;
         mInfo = null;
@@ -268,6 +271,11 @@ public class DeviceProfile {
                 isGestureMode
         );
 
+        context = getContext(info, isLandscapeOrientation()
+                        ? Configuration.ORIENTATION_LANDSCAPE
+                        : Configuration.ORIENTATION_PORTRAIT,
+                windowBounds);
+
         mInsets.set(windowBounds.insets);
         this.mDisplayOptionSpec = displayOptionSpec;
 
@@ -289,10 +297,6 @@ public class DeviceProfile {
                         && wmProxy.isTaskbarDrawnInProcess();
 
         // Some more constants.
-        Context context = getContext(info, isLandscapeOrientation()
-                        ? Configuration.ORIENTATION_LANDSCAPE
-                        : Configuration.ORIENTATION_PORTRAIT,
-                windowBounds);
         final Resources res = context.getResources();
 
         overviewProfile = OverviewProfile.Factory.createOverviewProfile(res);
@@ -558,6 +562,10 @@ public class DeviceProfile {
                 getWorkspaceIconProfile().getIconSizePx(), dotRendererCache);
         mDotRendererAllApps = createDotRenderer(
                 getAllAppsProfile().getIconSizePx(), dotRendererCache);
+    }
+
+    public Context getContext() {
+        return context;
     }
 
     private boolean isLandscapeOrientation()  {
