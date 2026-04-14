@@ -129,8 +129,7 @@ public class OverviewState extends LauncherState {
         if (showFloatingSearch) {
             elements |= FLOATING_SEARCH_BAR;
         }
-        if (dp.getDeviceProperties().isTablet() ||
-                !LauncherPrefs.RECENTS_CLEAR_ALL.get(dp.getContext())) {
+        if (dp.getDeviceProperties().isTablet()) {
             elements |= CLEAR_ALL_BUTTON;
         }
         if (launcherUiState.isSplitSelectActiveRef().getValue()) {
